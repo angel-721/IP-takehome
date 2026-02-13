@@ -44,5 +44,6 @@ for productElement in productList:
         # instead I'm just assuming anything that doesn't perfectly fit this isn't a product div and not reading it
         pass
 
+
 driver.quit()
-print(json.dumps(products, indent=2))
+print(f"{json.dumps(products)}]")
