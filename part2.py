@@ -16,11 +16,9 @@ def parseArgs():
     return args
 
 
-def main(args):
-    client = OpenAI()
+def getProductsData(args):
     products = []
     options = Options()
-
     if args.isHeadless:
         options.add_argument("--headless=new")
 
@@ -69,6 +67,12 @@ def main(args):
             pass
 
     driver.quit()
+    return products
+
+
+def main(args):
+    client = OpenAI()
+    products = getProductsData(args)
 
     if len(products) < 1:
         print(f"No Amazon listings found for query: {args.query}")
@@ -93,9 +97,9 @@ def main(args):
             (p for p in products if p["title"] == ep["title"]), None
         )
         if matching_product:
-            ep["url"] = matching_product["url"]  # Changed this line
+            ep["url"] = matching_product["url"]
 
-    print(json.dumps(enhancedProducts, indent=2))  # Changed this line too
+    print(json.dumps(enhancedProducts, indent=2))
 
 
 if __name__ == "__main__":
