@@ -39,8 +39,10 @@ for productElement in productList:
         productData["ratingString"] = ratingA.get_attribute("innerHTML").split(" ")[0]
         productData["price"] = priceString
         products.append(productData)
-    except:
-        continue
+    except Exception:
+        # Ideally I would better split up the code to get the product div then have error handling for the product div
+        # instead I'm just assuming anything that doesn't perfectly fit this isn't a product div and not reading it
+        pass
 
 driver.quit()
 print(json.dumps(products, indent=2))
